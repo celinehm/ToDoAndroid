@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Bouton Retour -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="←"
+            android:textSize="25sp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Titre de la page -->
+        <TextView
+            android:id="@+id/tvAddTaskTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajouter une tâche"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- EditText Titre + bouton Voice -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="Titre de la tâche"
+                android:padding="10dp"
+                android:background="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnVoiceInput"
+                android:layout_width="50dp"
+                android:layout_height="48dp"
+                android:text="🎤"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- EditText Description -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Description"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp"
+            android:background="#FFFFFF"
+            android:inputType="textMultiLine"
+            android:gravity="top"/>
+
+        <!-- EditText Catégorie -->
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Catégorie"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp"
+            android:background="#FFFFFF"/>
+
+        <!-- Spinner Priorité -->
+        <Spinner
+            android:id="@+id/spinnerPriority"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="20dp"
+            android:background="#FFFFFF"/>
+
+        <!-- Boutons Sauvegarder / Annuler -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Annuler"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnSaveTask"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Sauvegarder"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Bouton Retour (seul en haut) -->
+    <Button
+        android:id="@+id/btnBackEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="←"
+        android:textSize="25sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Titre CENTRÉ comme dans ton AddTask -->
+    <TextView
+        android:id="@+id/tvEditTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modifier la tâche"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Champ pour modifier le titre -->
+    <EditText
+        android:id="@+id/editTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Modifier le titre" />
+
+    <!-- Champ pour modifier la description -->
+    <EditText
+        android:id="@+id/editTaskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Modifier la description"
+        android:layout_marginTop="12dp" />
+
+    <!-- Champ pour modifier la catégorie -->
+    <EditText
+        android:id="@+id/editTaskCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Modifier la catégorie"
+        android:layout_marginTop="12dp" />
+
+    <!-- Bouton pour enregistrer -->
+    <Button
+        android:id="@+id/btnSaveTaskChanges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enregistrer"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

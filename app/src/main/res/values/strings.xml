@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MY TO-DO APP</string>
+
+    <!-- Boutons principaux -->
+    <string name="add_task_button_main">Ajouter tâche</string>
+    <string name="settings_button">Paramètres</string>
+    <string name="search_button">Recherche</string>
+
+    <!-- AddTaskActivity -->
+    <string name="task_title_hint">Titre Activité</string>
+    <string name="start_date_hint">Date début</string>
+    <string name="end_date_hint">Date fin</string>
+    <string name="task_done">Activité terminée</string>
+    <string name="add_task_button">Ajouter</string>
+
+    <!-- CategoriesActivity -->
+    <string name="hint_new_category">Nouvelle catégorie</string>
+    <string name="btn_add">Ajouter</string>
+
+    <!-- RecyclerView Item -->
+    <string name="task_title_example">Titre</string>
+    <string name="task_dates_example">01/01 → 02/01</string>
+    <string name="task_priority_example">High</string>
+    <string name="task_done_example">Fait ?</string>
+
+    <!-- SettingsActivity -->
+    <string name="dark_mode">Dark Mode</string>
+    <string name="btn_notifications">Notifications</string>
+    <string name="btn_categories">Categories</string>
+
+    <!-- NotificationsActivity -->
+    <string name="notifications_title">Paramètres Notifications</string>
+</resources>

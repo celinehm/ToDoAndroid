@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_theme"
+        android:title="Mode sombre / clair"/>
+    <item
+        android:id="@+id/menu_sort_date"
+        android:title="Trier par date"/>
+    <item
+        android:id="@+id/menu_sort_priority"
+        android:title="Trier par priorité"/>
+    <item
+        android:id="@+id/menu_show_completed"
+        android:title="Afficher tâches terminées"/>
+</menu>
