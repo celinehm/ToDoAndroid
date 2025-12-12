@@ -1,6 +1,7 @@
 package com.example.myto_doapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Switch
@@ -49,6 +50,7 @@ class SettingsActivity : AppCompatActivity() {
 
         btnCategories.setOnClickListener {
             // Logique pour afficher les catégories
+            startActivity(Intent(this, CategoriesActivity::class.java))
         }
 
         btnBack.setOnClickListener {

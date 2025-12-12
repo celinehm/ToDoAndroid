@@ -41,11 +41,37 @@ class MainActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter(TaskRepository.tasks) { task -> onTaskClicked(task) }
         recyclerView.adapter = taskAdapter
 
-        // Exemple de tâche initiale
-        if (TaskRepository.tasks.isEmpty()) {
-            TaskRepository.tasks.add(Task(id = 1, title = "Tâche test", category = "Test", priority = "High"))
-            TaskRepository.addCategory("Test")
+        // 🔹 Charger les tâches sauvegardées
+        val prefs = getSharedPreferences("tasks_prefs", Context.MODE_PRIVATE)
+        val savedTasks = prefs.getStringSet("tasks_set", emptySet())
+        savedTasks?.forEach { s ->
+            val parts = s.split("||")
+            if (parts.size == 6) {
+                TaskRepository.tasks.add(
+                    Task(
+                        id = parts[0].toInt(),
+                        title = parts[1],
+                        description = parts[2],
+                        category = parts[3],
+                        priority = parts[4],
+                        isDone = parts[5].toBoolean()
+                    )
+                )
+            }
         }
+
+        // Exemple de tâche initiale si aucune tâche
+        /*if (TaskRepository.tasks.isEmpty()) {
+            TaskRepository.tasks.add(
+                Task(
+                    id = 1,
+                    title = "Tâche test",
+                    category = "Test",
+                    priority = "High"
+                )
+            )
+            TaskRepository.addCategory("Test")
+        } */
 
         // === Launcher pour AJOUTER une tâche ===
         val addTaskLauncher =
@@ -62,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     TaskRepository.tasks.add(newTask)
                     TaskRepository.addCategory(newTask.category)
+                    saveTasks() // 🔹 Sauvegarde
                     updateTaskList()
                 }
             }
@@ -89,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     val data = result.data ?: return@registerForActivityResult
-                    val id = data.getIntExtra("task_id", -1)
+                    val id = data.getIntExtra("edit_task_id", -1)
 
                     val task = TaskRepository.tasks.find { it.id == id } ?: return@registerForActivityResult
 
@@ -97,7 +124,8 @@ class MainActivity : AppCompatActivity() {
                     task.title = data.getStringExtra("task_title") ?: task.title
                     task.description = data.getStringExtra("task_description") ?: task.description
                     task.category = data.getStringExtra("task_category") ?: task.category
-                    TaskRepository.addCategory(task.category) // Ajoute la catégorie modifiée
+                    TaskRepository.addCategory(task.category)
+                    saveTasks() // 🔹 Sauvegarde après modification
 
                     updateTaskList()
                     Toast.makeText(this, "Tâche modifiée", Toast.LENGTH_SHORT).show()
@@ -148,25 +176,37 @@ class MainActivity : AppCompatActivity() {
 
                     0 -> {
                         task.isDone = !task.isDone
+                        saveTasks() // 🔹 Sauvegarde après changement d'état
                         updateTaskList()
                     }
 
                     1 -> {
-                        val intent = Intent(this, EditTaskActivity::class.java)
-                        intent.putExtra("task_id", task.id)
-                        intent.putExtra("task_title", task.title)
-                        intent.putExtra("task_description", task.description)
-                        intent.putExtra("task_category", task.category)
+                        val intent = Intent(this, AddTaskActivity::class.java)
+                        intent.putExtra("edit_task_id", task.id)
+                        intent.putExtra("edit_title", task.title)
+                        intent.putExtra("edit_description", task.description)
+                        intent.putExtra("edit_category", task.category)
+                        intent.putExtra("edit_priority", task.priority)
                         editTaskLauncher.launch(intent)
                     }
 
                     2 -> {
                         TaskRepository.tasks.remove(task)
+                        saveTasks() // 🔹 Sauvegarde après suppression
                         updateTaskList()
                         Toast.makeText(this, "Tâche supprimée", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             .show()
+    }
+
+    // 🔹 Fonction de sauvegarde
+    private fun saveTasks() {
+        val prefs = getSharedPreferences("tasks_prefs", Context.MODE_PRIVATE)
+        val taskStrings = TaskRepository.tasks.map {
+            "${it.id}||${it.title}||${it.description}||${it.category}||${it.priority}||${it.isDone}"
+        }
+        prefs.edit().putStringSet("tasks_set", taskStrings.toSet()).apply()
     }
 }

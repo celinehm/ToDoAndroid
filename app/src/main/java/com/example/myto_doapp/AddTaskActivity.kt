@@ -1,6 +1,7 @@
 package com.example.myto_doapp
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -16,7 +17,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var etTitle: EditText
     private lateinit var etDesc: EditText
-    private lateinit var etCategory: EditText
+    private lateinit var spinnerCategory: Spinner
     private lateinit var spinnerPriority: Spinner
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
@@ -24,7 +25,7 @@ class AddTaskActivity : AppCompatActivity() {
     private lateinit var btnBack: Button
 
     private var isEditMode = false
-    private var editTaskId: Int = -1  // pour identifier la tâche à modifier
+    private var editTaskId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,7 +34,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         etTitle = findViewById(R.id.etTitle)
         etDesc = findViewById(R.id.etDescription)
-        etCategory = findViewById(R.id.etCategory)
+        spinnerCategory = findViewById(R.id.spinnerCategory)   // 🔥 NOUVEAU
         spinnerPriority = findViewById(R.id.spinnerPriority)
         btnSave = findViewById(R.id.btnSaveTask)
         btnCancel = findViewById(R.id.btnCancel)
@@ -47,20 +48,35 @@ class AddTaskActivity : AppCompatActivity() {
 
         // Spinner priorité
         val priorities = arrayOf("High", "Medium", "Low")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, priorities)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerPriority.adapter = adapter
+        val adapterPriority = ArrayAdapter(this, android.R.layout.simple_spinner_item, priorities)
+        adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerPriority.adapter = adapterPriority
 
-        //-----------------------------------------------------------
-        // 🔥 MODE MODIFICATION : si l'intent contient une tâche
-        //-----------------------------------------------------------
+        // ------------ 🔥 CHARGER LES CATÉGORIES UTILISATEUR --------------
+        val prefs = getSharedPreferences("categories", Context.MODE_PRIVATE)
+        val savedCategories = prefs.getStringSet("categories_set", emptySet())?.toMutableList()
+            ?: mutableListOf()
+
+        if (savedCategories.isEmpty()) {
+            savedCategories.add("General") // valeur par défaut si l’utilisateur a rien ajouté
+        }
+
+        val adapterCategories =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, savedCategories)
+        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategory.adapter = adapterCategories
+
+        // 🔥 MODE MODIFICATION
         if (intent.hasExtra("edit_task_id")) {
             isEditMode = true
             editTaskId = intent.getIntExtra("edit_task_id", -1)
 
             etTitle.setText(intent.getStringExtra("edit_title"))
             etDesc.setText(intent.getStringExtra("edit_description"))
-            etCategory.setText(intent.getStringExtra("edit_category"))
+
+            val editCategory = intent.getStringExtra("edit_category")
+            val index = savedCategories.indexOf(editCategory)
+            if (index >= 0) spinnerCategory.setSelection(index)
 
             val priority = intent.getStringExtra("edit_priority")
             val priorityIndex = priorities.indexOf(priority)
@@ -87,13 +103,13 @@ class AddTaskActivity : AppCompatActivity() {
             voiceLauncher.launch(intent)
         }
 
-        // Sauvegarder (ajout ou modification)
+        // Sauvegarder
         btnSave.setOnClickListener {
             val resultIntent = Intent()
 
             resultIntent.putExtra("task_title", etTitle.text.toString())
             resultIntent.putExtra("task_description", etDesc.text.toString())
-            resultIntent.putExtra("task_category", etCategory.text.toString())
+            resultIntent.putExtra("task_category", spinnerCategory.selectedItem.toString()) // 🔥 ici
             resultIntent.putExtra("task_priority", spinnerPriority.selectedItem.toString())
 
             if (isEditMode) {

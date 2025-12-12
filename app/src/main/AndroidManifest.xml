@@ -39,6 +39,8 @@
             android:name=".SearchActivity"
             android:exported="false" />
 
+        <activity android:name=".CategoriesActivity" />
+
         <!-- Paramètres -->
         <activity
             android:name=".SettingsActivity"
