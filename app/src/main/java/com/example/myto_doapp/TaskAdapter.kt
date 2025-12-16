@@ -39,7 +39,7 @@ class TaskAdapter(
         holder.tvTitle.text = task.title
         holder.tvCategory.text = task.category
         holder.tvPriority.text = task.priority
-        holder.tvDate.text = task.dateCreation.toString()
+        holder.tvDate.text = formatDate(task.dateCreation)
 
         // Barrer le texte si la tâche est terminée
         if (task.isDone) {

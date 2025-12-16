@@ -9,5 +9,5 @@ data class Task(
     var category: String = "General",
     var priority: String = "Normal", // High, Medium, Low
     var isDone: Boolean = false,
-    val dateCreation: Date = Date() // ne peut pas être modifié
+    val dateCreation: Long = System.currentTimeMillis()
 )

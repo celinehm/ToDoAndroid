@@ -52,7 +52,7 @@ class AddTaskActivity : AppCompatActivity() {
         adapterPriority.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerPriority.adapter = adapterPriority
 
-        // ------------ 🔥 CHARGER LES CATÉGORIES UTILISATEUR --------------
+        // ------------ CHARGER LES CATÉGORIES UTILISATEUR --------------
         val prefs = getSharedPreferences("categories", Context.MODE_PRIVATE)
         val savedCategories = prefs.getStringSet("categories_set", emptySet())?.toMutableList()
             ?: mutableListOf()
@@ -66,7 +66,7 @@ class AddTaskActivity : AppCompatActivity() {
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategory.adapter = adapterCategories
 
-        // 🔥 MODE MODIFICATION
+        // MODE MODIFICATION
         if (intent.hasExtra("edit_task_id")) {
             isEditMode = true
             editTaskId = intent.getIntExtra("edit_task_id", -1)

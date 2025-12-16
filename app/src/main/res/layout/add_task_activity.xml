@@ -3,23 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="?attr/colorBackground">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Bouton Retour -->
         <Button
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="←"
             android:textSize="25sp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"/>
 
-        <!-- Titre de la page -->
         <TextView
             android:id="@+id/tvAddTaskTitle"
             android:layout_width="match_parent"
@@ -28,9 +28,9 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"
+            android:textColor="?attr/colorOnBackground"
             android:layout_marginBottom="16dp"/>
 
-        <!-- EditText Titre + bouton Voice -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,9 @@
                 android:layout_weight="1"
                 android:hint="Titre de la tâche"
                 android:padding="10dp"
-                android:background="#FFFFFF"/>
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurface"
+                android:background="?attr/colorSurface"/>
 
             <Button
                 android:id="@+id/btnVoiceInput"
@@ -52,10 +54,11 @@
                 android:layout_height="48dp"
                 android:text="🎤"
                 android:textSize="18sp"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="?attr/colorOnPrimary"/>
         </LinearLayout>
 
-        <!-- EditText Description -->
         <EditText
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
@@ -63,45 +66,48 @@
             android:hint="Description"
             android:padding="10dp"
             android:layout_marginBottom="12dp"
-            android:background="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface"
+            android:background="?attr/colorSurface"
             android:inputType="textMultiLine"
             android:gravity="top"/>
 
-        <!-- EditText Catégorie -->
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="20dp"
-            android:background="#FFFFFF"/>
+            android:background="?attr/colorSurface"/>
 
-        <!-- Spinner Priorité -->
         <Spinner
             android:id="@+id/spinnerPriority"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="20dp"
-            android:background="#FFFFFF"/>
+            android:background="?attr/colorSurface"/>
 
-        <!-- Boutons Sauvegarder / Annuler -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="end"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="Annuler"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="?attr/colorSurface"
+                android:textColor="?attr/colorOnSurface"/>
 
             <Button
                 android:id="@+id/btnSaveTask"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="Sauvegarder"/>
+                android:text="Sauvegarder"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="?attr/colorOnPrimary"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

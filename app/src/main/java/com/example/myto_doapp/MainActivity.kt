@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         DarkModeManager.applyNightModeIfEnabled(this)
         setContentView(R.layout.mainactivity)
 
+        // RecyclerView + Adapter
         recyclerView = findViewById(R.id.recyclerViewTasks)
         val btnAddTask = findViewById<Button>(R.id.btn_add_task)
         val btnSettings = findViewById<Button>(R.id.btn_settings)
@@ -41,8 +42,29 @@ class MainActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter(TaskRepository.tasks) { task -> onTaskClicked(task) }
         recyclerView.adapter = taskAdapter
 
-        // 🔹 Charger les tâches sauvegardées
+        TaskRepository.tasks.clear()
+        // Charger les tâches sauvegardées
         val prefs = getSharedPreferences("tasks_prefs", Context.MODE_PRIVATE)
+        val savedTasks = prefs.getStringSet("tasks_set", emptySet())
+        savedTasks?.forEach { s ->
+            val parts = s.split("||")
+            if (parts.size == 7) {
+                TaskRepository.tasks.add(
+                    Task(
+                        id = parts[0].toInt(),
+                        title = parts[1],
+                        description = parts[2],
+                        category = parts[3],
+                        priority = parts[4],
+                        isDone = parts[5].toBoolean(),
+                        dateCreation = parts[6].toLong()
+                    )
+                )
+            }
+        }
+
+        // 🔹 Charger les tâches sauvegardées
+        /*val prefs = getSharedPreferences("tasks_prefs", Context.MODE_PRIVATE)
         val savedTasks = prefs.getStringSet("tasks_set", emptySet())
         savedTasks?.forEach { s ->
             val parts = s.split("||")
@@ -58,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-        }
+        }*/
 
         // Exemple de tâche initiale si aucune tâche
         /*if (TaskRepository.tasks.isEmpty()) {
@@ -181,12 +203,12 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     1 -> {
-                        val intent = Intent(this, AddTaskActivity::class.java)
-                        intent.putExtra("edit_task_id", task.id)
-                        intent.putExtra("edit_title", task.title)
-                        intent.putExtra("edit_description", task.description)
-                        intent.putExtra("edit_category", task.category)
-                        intent.putExtra("edit_priority", task.priority)
+                        val intent = Intent(this, EditTaskActivity::class.java)
+                        intent.putExtra("task_id", task.id)
+                        intent.putExtra("task_title", task.title)
+                        intent.putExtra("task_description", task.description)
+                        intent.putExtra("task_category", task.category)
+                        intent.putExtra("task_priority", task.priority)
                         editTaskLauncher.launch(intent)
                     }
 
@@ -201,12 +223,14 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    // 🔹 Fonction de sauvegarde
+    // Fonction de sauvegarde
     private fun saveTasks() {
         val prefs = getSharedPreferences("tasks_prefs", Context.MODE_PRIVATE)
         val taskStrings = TaskRepository.tasks.map {
-            "${it.id}||${it.title}||${it.description}||${it.category}||${it.priority}||${it.isDone}"
+            "${it.id}||${it.title}||${it.description}||${it.category}||${it.priority}||${it.isDone}||${it.dateCreation}"
         }
         prefs.edit().putStringSet("tasks_set", taskStrings.toSet()).apply()
     }
+
+
 }

@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?attr/colorBackground"
     android:padding="20dp">
 
-    <!-- Bouton Retour (seul en haut) -->
+    <!-- Bouton Retour -->
     <Button
         android:id="@+id/btnBackEdit"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="←"
         android:textSize="25sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"/>
 
-    <!-- Titre CENTRÉ comme dans ton AddTask -->
+    <!-- Titre -->
     <TextView
         android:id="@+id/tvEditTaskTitle"
         android:layout_width="match_parent"
@@ -24,36 +26,49 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="?attr/colorOnBackground"
         android:layout_marginBottom="20dp"/>
 
-    <!-- Champ pour modifier le titre -->
+    <!-- TITRE -->
     <EditText
         android:id="@+id/editTaskTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Modifier le titre" />
+        android:layout_height="48dp"
+        android:hint="Modifier le titre"
+        android:padding="10dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorOnSurface"
+        android:background="?attr/colorSurface"/>
 
-    <!-- Champ pour modifier la description -->
+    <!-- DESCRIPTION (multi-ligne) -->
     <EditText
         android:id="@+id/editTaskDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:hint="Modifier la description"
-        android:layout_marginTop="12dp" />
+        android:padding="10dp"
+        android:layout_marginTop="12dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorOnSurface"
+        android:background="?attr/colorSurface"
+        android:inputType="textMultiLine"
+        android:gravity="top"/>
 
-    <!-- Champ pour modifier la catégorie -->
-    <EditText
-        android:id="@+id/editTaskCategory"
+    <!-- SPINNER CATÉGORIE -->
+    <Spinner
+        android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Modifier la catégorie"
-        android:layout_marginTop="12dp" />
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="?attr/colorSurface"/>
 
-    <!-- Bouton pour enregistrer -->
+    <!-- Bouton Enregistrer -->
     <Button
         android:id="@+id/btnSaveTaskChanges"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="Enregistrer"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"/>
 </LinearLayout>

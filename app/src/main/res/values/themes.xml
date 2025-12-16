@@ -17,5 +17,14 @@
 
         <item name="colorError">@color/colorError</item>
         <item name="colorOnError">@color/colorOnError</item>
+
+        <!-- Couleur de fond -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+
+        <!-- Logo au centre -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+
+        <!-- Thème après le splash -->
+        <item name="postSplashScreenTheme">@style/Theme.MyToDoApp</item>
     </style>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Couleurs principales -->
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#b80056</color>
     <color name="colorPrimaryVariant">#3700B3</color>
     <color name="colorOnPrimary">#FFFFFF</color>
 
@@ -21,7 +21,7 @@
     <color name="colorOnError">#FFFFFF</color>
 
     <!-- Autres couleurs utiles -->
-    <color name="purple_200">#BB86FC</color>
+    <color name="purple_200">#b80056</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
     <color name="black">#000000</color>
@@ -30,4 +30,6 @@
     <!-- Couleurs de fond -->
     <color name="background_light">#FFFFFF</color>
     <color name="background_dark">#121212</color> <!-- pour thème nuit -->
+
+    <color name="splash_background">#b80056</color>
 </resources>
